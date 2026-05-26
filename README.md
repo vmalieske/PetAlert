@@ -3,6 +3,9 @@
 
 PetAlert is an Android app for pet owners that ensures someone checks on their pet at home in case of an emergency.
 
+## Preview
+![PetAlert Banner](assets/images/Preview_PetAlert.jpg)
+
 ## Idea
 
 If you're involved in an accident or otherwise unable to return home, first responders or hospital staff often have no way of knowing that a pet is waiting alone. PetAlert displays a persistent notification on the lock screen that directly informs first responders and provides an emergency contact.
