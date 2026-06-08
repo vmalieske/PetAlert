@@ -7,11 +7,21 @@ void startCallback() {
 
 class PetAlertTaskHandler extends TaskHandler {
   @override
-  Future<void> onStart(DateTime timestamp, TaskStarter starter) async {}
+  Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
+    print('Start Task');
+  }
 
   @override
   void onRepeatEvent(DateTime timestamp) {}
 
   @override
-  Future<void> onDestroy(DateTime timestamp, bool isTimeout) async {}
+  Future<void> onDestroy(DateTime timestamp, bool isTimeout) async {
+    print('Stop Task');
+  }
+
+  @override
+  void onNotificationDismissed() {
+    FlutterForegroundTask.sendDataToMain('dismissed');
+    FlutterForegroundTask.stopService();
+  }
 }
