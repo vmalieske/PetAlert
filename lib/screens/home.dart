@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
@@ -22,15 +24,28 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     const Center(child: Text('Einstellungen')),
   ];
 
+  ReceivePort? _receivePort;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _checkServiceStatus();
+    _registerReceivePort();
+  }
+
+  void _registerReceivePort() {
+    _receivePort = FlutterForegroundTask.receivePort;
+    _receivePort?.listen((message) {
+      if (message == 'dismissed') {
+        _checkServiceStatus();
+      }
+    });
   }
 
   @override
   void dispose() {
+    _receivePort?.close();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
